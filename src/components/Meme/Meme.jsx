@@ -8,8 +8,6 @@ const Meme = () => {
     let randomNum = Math.floor(Math.random() * memesData.data.memes.length);
     img = memesData.data.memes[randomNum].url;
     name = memesData.data.memes[randomNum].name;
-    console.log("Image ID : " + img);
-    console.log("Name : " + name);
     getMemeImage();
   }
 
