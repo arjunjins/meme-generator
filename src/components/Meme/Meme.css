@@ -24,3 +24,12 @@ main {
   border: 1px solid #d5d4d8;
   text-indent: 10px;
 }
+
+.meme-image {
+  width: 90%;
+  padding: 10px;
+}
+
+.center {
+  text-align: center;
+}
