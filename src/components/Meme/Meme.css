@@ -28,6 +28,7 @@ main {
 .meme-image {
   width: 90%;
   padding: 10px;
+  padding-top: 30px;
 }
 
 .center {

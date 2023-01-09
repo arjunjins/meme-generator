@@ -3,19 +3,20 @@ import "./Meme.css";
 import memesData from "./memesData";
 import { useState } from "react";
 const Meme = () => {
-  let img, name;
+  const [meme, setMeme] = useState({
+    topText: "",
+    bottomText: "",
+    randomImage: "http://i.imgflip.com/1bij.jpg",
+  });
+  const [allMemeImages, setAllMemeImages] = useState(memesData);
   function handleClick() {
-    let randomNum = Math.floor(Math.random() * memesData.data.memes.length);
-    img = memesData.data.memes[randomNum].url;
-    name = memesData.data.memes[randomNum].name;
-    getMemeImage();
+    let randomNum = Math.floor(Math.random() * allMemeImages.data.memes.length);
+    let img = allMemeImages.data.memes[randomNum].url;
+    setMeme({
+      ...meme,
+      randomImage: img,
+    });
   }
-
-  const [memeImage, setMemeImage] = useState("");
-  function getMemeImage() {
-    setMemeImage(img);
-  }
-
   return (
     <main className="meme">
       <div className="center">
@@ -26,7 +27,7 @@ const Meme = () => {
             Get a new meme image 🖼
           </button>
         </div>
-        <img src={memeImage} alt="Random meme" className="meme-image" />
+        <img src={meme.randomImage} alt="Random meme" className="meme-image" />
       </div>
     </main>
   );
