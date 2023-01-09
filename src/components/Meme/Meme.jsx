@@ -12,9 +12,11 @@ const Meme = () => {
   function handleClick() {
     let randomNum = Math.floor(Math.random() * allMemeImages.data.memes.length);
     let img = allMemeImages.data.memes[randomNum].url;
-    setMeme({
-      ...meme,
-      randomImage: img,
+    setMeme((prevMeme) => {
+      return {
+        ...prevMeme,
+        randomImage: img,
+      };
     });
   }
   return (
