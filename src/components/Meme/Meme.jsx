@@ -3,9 +3,7 @@ import "./Meme.css";
 import memesData from "./memesData";
 import { useState } from "react";
 
-
 const Meme = () => {
-
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
@@ -25,21 +23,47 @@ const Meme = () => {
     });
   }
 
-  
+  function handleEvent(event) {
+    let { name, value } = event.target;
+    setMeme((prevMeme) => {
+      return {
+        ...prevMeme,
+        [name]: value,
+      };
+    });
+  }
   return (
     <main className="meme">
       <div className="center">
         <div className="form">
-          <input type="text" placeholder="Top Text" className="inp" />
-          <input type="text" placeholder="Bottom Text" className="inp" />
+          <input
+            type="text"
+            placeholder="Top Text"
+            className="inp"
+            name="topText"
+            value={meme.topText}
+            onChange={handleEvent}
+          />
+          <input
+            type="text"
+            placeholder="Bottom Text"
+            className="inp"
+            name="bottomText"
+            value={meme.bottomText}
+            onChange={handleEvent}
+          />
           <button type="submit" className="buttn" onClick={handleClick}>
             Get a new meme image 🖼
           </button>
         </div>
         <div className="meme-pic">
-        <img src={meme.randomImage} alt="Random meme" className="meme-image" />
-        <h2 className="meme-pic-text top">One does not simple</h2>
-        <h2 className="meme-pic-text bottom">Walk into Mordor</h2>
+          <img
+            src={meme.randomImage}
+            alt="Random meme"
+            className="meme-image"
+          />
+          <h2 className="meme-pic-text top">{meme.topText}</h2>
+          <h2 className="meme-pic-text bottom">{meme.bottomText}</h2>
         </div>
       </div>
     </main>
