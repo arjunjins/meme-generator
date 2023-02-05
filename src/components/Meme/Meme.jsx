@@ -1,7 +1,6 @@
 import React from "react";
 import "./Meme.css";
-import memesData from "./memesData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Meme = () => {
   const [meme, setMeme] = useState({
@@ -10,11 +9,19 @@ const Meme = () => {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
 
-  const [allMemeImages, setAllMemeImages] = useState(memesData);
+
+  const [allMeme, setAllMeme] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMeme(data));
+  }, []);
+
 
   function handleClick() {
-    let randomNum = Math.floor(Math.random() * allMemeImages.data.memes.length);
-    let img = allMemeImages.data.memes[randomNum].url;
+    let randomNum = Math.floor(Math.random() * allMeme.data.memes.length);
+    let img = allMeme.data.memes[randomNum].url;
     setMeme((prevMeme) => {
       return {
         ...prevMeme,
@@ -22,6 +29,7 @@ const Meme = () => {
       };
     });
   }
+
 
   function handleEvent(event) {
     let { name, value } = event.target;
@@ -32,6 +40,8 @@ const Meme = () => {
       };
     });
   }
+
+
   return (
     <main className="meme">
       <div className="center">
@@ -71,5 +81,3 @@ const Meme = () => {
 };
 
 export default Meme;
-
-//Added comment
